@@ -13,7 +13,7 @@ namespace TryVeil
 
         private static readonly ViewModel ViewModel = new ViewModel
         {
-            AlbumName = "F♯A♯∞",
+            AlbumName = "F♯ A♯ ∞",
             Artist = "Godspeed You! Black Emperor",
             Tracks = new[] {
                 new TrackViewModel { TrackName = "The Dead Flag Blues", Length = TimeSpan.FromSeconds(16*60+27) },
