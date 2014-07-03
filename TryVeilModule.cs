@@ -15,12 +15,17 @@ namespace TryVeil
         private static readonly AlbumViewModel StaticAlbumViewModel = new AlbumViewModel
         {
             AlbumName = "F♯ A♯ ∞",
-            Artist = "Godspeed You! Black Emperor",
+            Artist = new ArtistViewModel {
+                ArtistName = "Godspeed You! Black Emperor"
+            },
+            IsAvailableOnVinyl = true,
+            WasUSNumberOne = false,
             Tracks = new[] {
                 new TrackViewModel { TrackName = "The Dead Flag Blues", Length = TimeSpan.FromSeconds(16*60+27) },
                 new TrackViewModel { TrackName = "East Hastings", Length = TimeSpan.FromSeconds(17*60+58) },
                 new TrackViewModel { TrackName = "Providence", Length = TimeSpan.FromSeconds(29*60+02) }
-            }
+            },
+            Reviews = new ReviewViewModel[0]
         };
 
         private static readonly Lazy<string> ViewModelJson = new Lazy<string>(() =>
@@ -68,9 +73,20 @@ namespace TryVeil
     {
         public string AlbumName { get; set; }
 
-        public string Artist { get; set; }
+        public ArtistViewModel Artist { get; set; }
 
-        public IEnumerable<TrackViewModel> Tracks { get; set; }
+        public ICollection<TrackViewModel> Tracks { get; set; }
+
+        public bool IsAvailableOnVinyl { get; set; }
+
+        public bool WasUSNumberOne { get; set; }
+
+        public ICollection<ReviewViewModel> Reviews { get; set; }
+    }
+
+    public class ArtistViewModel
+    {
+        public string ArtistName { get; set; }
     }
 
     public class TrackViewModel
@@ -78,5 +94,10 @@ namespace TryVeil
         public string TrackName { get; set; }
 
         public TimeSpan Length { get; set; }
+    }
+
+    public class ReviewViewModel
+    {
+        public string Text { get; set; }
     }
 }
