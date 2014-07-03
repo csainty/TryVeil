@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using Nancy;
 using Newtonsoft.Json;
 using Veil;
@@ -11,7 +12,7 @@ namespace TryVeil
     {
         private static readonly VeilEngine Engine = new VeilEngine();
 
-        private static readonly ViewModel ViewModel = new ViewModel
+        private static readonly AlbumViewModel StaticAlbumViewModel = new AlbumViewModel
         {
             AlbumName = "F♯ A♯ ∞",
             Artist = "Godspeed You! Black Emperor",
@@ -24,7 +25,7 @@ namespace TryVeil
 
         private static readonly Lazy<string> ViewModelJson = new Lazy<string>(() =>
         {
-            return JsonConvert.SerializeObject(ViewModel, Formatting.Indented);
+            return JsonConvert.SerializeObject(StaticAlbumViewModel, Formatting.Indented);
         });
 
         public TryVeilModule()
@@ -39,7 +40,7 @@ namespace TryVeil
                 {
                     using (var reader = new StreamReader(Request.Body))
                     {
-                        var template = Engine.Compile<ViewModel>(parserKey, reader);
+                        var template = Engine.Compile<AlbumViewModel>(parserKey, reader);
 
                         return new Response()
                         {
@@ -47,9 +48,9 @@ namespace TryVeil
                             ContentType = "text/html",
                             Contents = s =>
                             {
-                                using (var writer = new StreamWriter(s))
+                                using (var writer = new StreamWriter(s, Encoding.UTF8))
                                 {
-                                    template(writer, ViewModel);
+                                    template(writer, StaticAlbumViewModel);
                                 }
                             }
                         };
@@ -63,7 +64,7 @@ namespace TryVeil
         }
     }
 
-    public class ViewModel
+    public class AlbumViewModel
     {
         public string AlbumName { get; set; }
 
