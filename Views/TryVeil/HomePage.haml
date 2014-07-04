@@ -5,7 +5,7 @@
     <title>Try Veil - The online tester for Veil templates</title>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/g/bootstrap@3.2.0(css/bootstrap.min.css+css/bootstrap-theme.min.css)" />
     <link rel="stylesheet" href="/content/css/site.css" />
-    <script src="//cdn.jsdelivr.net/g/jquery,react@0.10.0(react.min.js+JSXTransformer.js),bootstrap@3.2.0,lodash"></script>
+    <script src="//cdn.jsdelivr.net/g/jquery@2.1.1,react@0.10.0(react.min.js+JSXTransformer.js),bootstrap@3.2.0,lodash@2.4.1"></script>
     <script type="text/jsx" src="/content/js/site.js"></script>
 </head>
 <body>
@@ -16,6 +16,7 @@
         </div>
 
         <div class="help">
+			<button data-toggle="collapse" data-target=".view-model">Toggle Help</button>
             <div class="view-model collapse">
                 The following model is used to render the templates:
                 <pre>{{ this }}</pre>
@@ -27,7 +28,6 @@
                     </ul>
                 </p>
             </div>
-            <button data-toggle="collapse" data-target=".view-model">Toggle Help</button>
         </div>
 
         <div id="template-editor"></div>

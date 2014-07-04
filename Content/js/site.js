@@ -66,7 +66,6 @@ var TemplateEditor = React.createClass({
         }, this);
         return (
             <div>
-                Choose Parser:
                 <ul className="nav nav-pills">
                     {parserOptions}
                 </ul>
