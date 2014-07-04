@@ -5,15 +5,15 @@ var templates = {
         "basic": "{{AlbumName}} - {{Artist.ArtistName}}\n{{#each Tracks}}\n{{TrackName}} - {{Length}}\n{{/each}}",
         "if": "Chart Success:\n{{#if WasUSNumberOne }}\nIt's a hit\n{{else}}\nWho listens to charts anyway?\n{{/if}}",
         "unless": "{{#unless WasUSNumberOne }}\nWho listens to charts anyway?\n{{/unless}}",
-        "each": "{{#each Tracks}}\n{{TrackName}} - {{Length}}\n{{/each}}",
-        "eachelse": "{{#each Reviews}}\n{{Text}}\n{{else}}\nNo Reviews Yet\n{{/each}}",
+        "foreach": "{{#each Tracks}}\n{{TrackName}} - {{Length}}\n{{/each}}",
+        "emptyForEach": "{{#each Reviews}}\n{{Text}}\n{{else}}\nNo Reviews Yet\n{{/each}}",
         "whitespace": "<p>\n{{~Artist.ArtistName~}}\n</p>\n\n<p>\n{{Artist.ArtistName}}\n</p>",
-        'with': "{{#with Artist}}{{ArtistName}} - {{../AlbumName}}{{/with}}"
-
+        "with": "{{#with Artist}}{{ArtistName}} - {{../AlbumName}}{{/with}}"
     }, supersimple: {
         "basic": "@Model.AlbumName - @Model.Artist.ArtistName\n@Each.Tracks\n@Current.TrackName - @Current.Length\n@EndEach",
         "if": "Chart Success:\n@If.WasUSNumberOne\nIt's a hit\n@EndIf\n@IfNot.WasUSNumberOne\nWho listens to charts anyway?\n@EndIf",
-        "each": "@Each.Tracks\n@Current.TrackName - @Current.Length\n@EndEach"
+        "foreach": "@Each.Tracks\n@Current.TrackName - @Current.Length\n@EndEach",
+        "emptyForEach": "@If.HasReviews\n@Each.Reviews\n@Current.Text;\n@EndEach\n@EndIf\n@IfNot.HasReviews\nNo Reviews Yet\n@EndIf"
     }
 };
 
@@ -34,7 +34,7 @@ var TemplateEditor = React.createClass({
         this.setState({template: event.target.value }, this.executeTemplate);
     },
     chooseParser: function (event) {
-        var parser = $(event.target).data("parser"),
+        var parser = $(event.target).attr("data-parser"),
             templateName = this.state.templateName;
         if (!templates[parser][templateName]) {
             templateName = "basic";
@@ -43,7 +43,7 @@ var TemplateEditor = React.createClass({
         this.setState({ template: templates[parser][templateName], parser: parser, templateName: templateName }, this.executeTemplate);
     },
     chooseTemplate: function (event) {
-        var templateName = $(event.target).data("template");
+        var templateName = $(event.target).attr("data-template");
         this.setState({ templateName: templateName, template: templates[this.state.parser][templateName] }, this.executeTemplate);
     },
     executeTemplate: _.debounce(function () {
