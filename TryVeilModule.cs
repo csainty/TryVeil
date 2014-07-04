@@ -15,7 +15,8 @@ namespace TryVeil
         private static readonly AlbumViewModel StaticAlbumViewModel = new AlbumViewModel
         {
             AlbumName = "F♯ A♯ ∞",
-            Artist = new ArtistViewModel {
+            Artist = new ArtistViewModel
+            {
                 ArtistName = "Godspeed You! Black Emperor"
             },
             IsAvailableOnVinyl = true,
@@ -47,10 +48,10 @@ namespace TryVeil
                     {
                         var template = Engine.Compile<AlbumViewModel>(parserKey, reader);
 
-                        return new Response()
+                        return new Response
                         {
                             StatusCode = HttpStatusCode.OK,
-                            ContentType = "text/html",
+                            ContentType = "text/plain; charset=utf-8",
                             Contents = s =>
                             {
                                 using (var writer = new StreamWriter(s, Encoding.UTF8))
