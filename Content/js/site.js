@@ -8,7 +8,8 @@ var templates = {
         "foreach": "{{#each Tracks}}\n{{TrackName}} - {{Length}}\n{{/each}}",
         "emptyForEach": "{{#each Reviews}}\n{{Text}}\n{{else}}\nNo Reviews Yet\n{{/each}}",
         "whitespace": "<p>\n{{~Artist.ArtistName~}}\n</p>\n\n<p>\n{{Artist.ArtistName}}\n</p>",
-        "with": "{{#with Artist}}{{ArtistName}} - {{../AlbumName}}{{/with}}"
+        "with": "{{#with Artist}}{{ArtistName}} - {{../AlbumName}}{{/with}}",
+        "case-insensitive": "{{ AlbumName }}\n{{ albumName }}\n{{ albumname }}\n{{ ALBUMNAME }}\n"
     }, supersimple: {
         "basic": "@Model.AlbumName - @Model.Artist.ArtistName\n@Each.Tracks\n@Current.TrackName - @Current.Length\n@EndEach",
         "if": "Chart Success:\n@If.WasUSNumberOne\nIt's a hit\n@EndIf\n@IfNot.WasUSNumberOne\nWho listens to charts anyway?\n@EndIf",
